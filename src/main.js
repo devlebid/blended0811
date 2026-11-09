@@ -187,6 +187,7 @@ return createdOrder;
 
 
 
+
 const order = store.createOrder('Олена', { productName: 'Навушники', quantity: 2 }, { productName: 'Миша', quantity: 1 });
 
 console.log(order);
