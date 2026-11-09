@@ -153,3 +153,100 @@ console.log(products);
 //     tags: ['gaming', 'popular']
 //   }
 // ]
+
+const store = {
+  products: products,
+  orders: [],
+
+  createOrder(customer, ...requests) {
+    const items = [];
+    let total = 0;
+
+    for (const request of requests) {
+      const doubleCreateOrderItem = createOrderItem(this.products, request.productName, request.quantity);
+      if (doubleCreateOrderItem !== null) {
+        items.push(doubleCreateOrderItem);
+        total += doubleCreateOrderItem.total;
+      }
+    }
+    if (items.length === 0) {
+      return null
+    }
+    const createdOrder = {
+      customer: customer,
+      items: items,
+      total: total,
+      status: 'new'
+    } 
+    this.orders.push({ ...createdOrder });
+
+return createdOrder;
+  }
+}
+
+
+
+
+const order = store.createOrder('Олена', { productName: 'Навушники', quantity: 2 }, { productName: 'Миша', quantity: 1 });
+
+console.log(order);
+// {
+//   customer: 'Олена',
+//   items: [
+//     {
+//       name: 'Навушники',
+//       price: 2500,
+//       quantity: 2,
+//       total: 5000
+//     }
+//   ],
+//   total: 5000,
+//   status: 'new'
+// }
+
+console.log(store.orders);
+// [
+//   {
+//     customer: 'Олена',
+//     items: [
+//       {
+//         name: 'Навушники',
+//         price: 2500,
+//         quantity: 2,
+//         total: 5000,
+//       },
+//     ],
+//     total: 5000,
+//     status: 'new',
+//   },
+// ];
+
+console.log(store.products);
+// [
+//   {
+//     name: 'Ноутбук',
+//     price: 32000,
+//     quantity: 4,
+//     available: true,
+//     tags: ['tech', 'work', 'popular']
+//   },
+//   {
+//     name: 'Навушники',
+//     price: 2500,
+//     quantity: 4,
+//     available: true,
+//     tags: ['audio', 'wireless', 'popular']
+//   },
+//   {
+//     name: 'Миша',
+//     price: 1200,
+//     quantity: 0,
+//     available: false,
+//     tags: ['gaming', 'popular']
+//   }
+// ]
+
+
+
+
+
